@@ -1,0 +1,469 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2AD9677B16ED4F9B00389794 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677A16ED4F9B00389794 /* UIKit.framework */; };
+		2AD9677D16ED4F9B00389794 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677C16ED4F9B00389794 /* Foundation.framework */; };
+		2AD9677F16ED4F9B00389794 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677E16ED4F9B00389794 /* CoreGraphics.framework */; };
+		2AD9678516ED4F9B00389794 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9678316ED4F9B00389794 /* InfoPlist.strings */; };
+		2AD9678716ED4F9B00389794 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9678616ED4F9B00389794 /* main.m */; };
+		2AD9678B16ED4F9B00389794 /* GoogleStorageAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9678A16ED4F9B00389794 /* GoogleStorageAppDelegate.m */; };
+		2AD9678D16ED4F9B00389794 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9678C16ED4F9B00389794 /* Default.png */; };
+		2AD9678F16ED4F9B00389794 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9678E16ED4F9B00389794 /* Default@2x.png */; };
+		2AD9679116ED4F9B00389794 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9679016ED4F9B00389794 /* Default-568h@2x.png */; };
+		2AD9679416ED4F9B00389794 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD9679216ED4F9B00389794 /* MainStoryboard.storyboard */; };
+		2AD9679716ED4F9B00389794 /* GoogleStorageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9679616ED4F9B00389794 /* GoogleStorageViewController.m */; };
+		2AD9679F16ED4F9C00389794 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9679E16ED4F9C00389794 /* SenTestingKit.framework */; };
+		2AD967A016ED4F9C00389794 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677A16ED4F9B00389794 /* UIKit.framework */; };
+		2AD967A116ED4F9C00389794 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677C16ED4F9B00389794 /* Foundation.framework */; };
+		2AD967A916ED4F9C00389794 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AD967A716ED4F9C00389794 /* InfoPlist.strings */; };
+		2AD967AC16ED4F9C00389794 /* GGStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD967AB16ED4F9C00389794 /* GGStorageTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2AD967A216ED4F9C00389794 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2AD9676F16ED4F9B00389794 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2AD9677616ED4F9B00389794;
+			remoteInfo = GGStorage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2AD9677716ED4F9B00389794 /* GGStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AD9677A16ED4F9B00389794 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2AD9677C16ED4F9B00389794 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2AD9677E16ED4F9B00389794 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2AD9678216ED4F9B00389794 /* GGStorage-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GGStorage-Info.plist"; sourceTree = "<group>"; };
+		2AD9678416ED4F9B00389794 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2AD9678616ED4F9B00389794 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2AD9678816ED4F9B00389794 /* GGStorage-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GGStorage-Prefix.pch"; sourceTree = "<group>"; };
+		2AD9678916ED4F9B00389794 /* GoogleStorageAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleStorageAppDelegate.h; sourceTree = "<group>"; };
+		2AD9678A16ED4F9B00389794 /* GoogleStorageAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleStorageAppDelegate.m; sourceTree = "<group>"; };
+		2AD9678C16ED4F9B00389794 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		2AD9678E16ED4F9B00389794 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		2AD9679016ED4F9B00389794 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2AD9679316ED4F9B00389794 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		2AD9679516ED4F9B00389794 /* GoogleStorageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleStorageViewController.h; sourceTree = "<group>"; };
+		2AD9679616ED4F9B00389794 /* GoogleStorageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleStorageViewController.m; sourceTree = "<group>"; };
+		2AD9679D16ED4F9C00389794 /* GGStorageTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GGStorageTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AD9679E16ED4F9C00389794 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		2AD967A616ED4F9C00389794 /* GGStorageTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GGStorageTests-Info.plist"; sourceTree = "<group>"; };
+		2AD967A816ED4F9C00389794 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2AD967AA16ED4F9C00389794 /* GGStorageTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GGStorageTests.h; sourceTree = "<group>"; };
+		2AD967AB16ED4F9C00389794 /* GGStorageTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GGStorageTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2AD9677416ED4F9B00389794 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD9677B16ED4F9B00389794 /* UIKit.framework in Frameworks */,
+				2AD9677D16ED4F9B00389794 /* Foundation.framework in Frameworks */,
+				2AD9677F16ED4F9B00389794 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AD9679916ED4F9C00389794 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD9679F16ED4F9C00389794 /* SenTestingKit.framework in Frameworks */,
+				2AD967A016ED4F9C00389794 /* UIKit.framework in Frameworks */,
+				2AD967A116ED4F9C00389794 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2AD9676E16ED4F9B00389794 = {
+			isa = PBXGroup;
+			children = (
+				2AD9678016ED4F9B00389794 /* GGStorage */,
+				2AD967A416ED4F9C00389794 /* GGStorageTests */,
+				2AD9677916ED4F9B00389794 /* Frameworks */,
+				2AD9677816ED4F9B00389794 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2AD9677816ED4F9B00389794 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9677716ED4F9B00389794 /* GGStorage.app */,
+				2AD9679D16ED4F9C00389794 /* GGStorageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AD9677916ED4F9B00389794 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9677A16ED4F9B00389794 /* UIKit.framework */,
+				2AD9677C16ED4F9B00389794 /* Foundation.framework */,
+				2AD9677E16ED4F9B00389794 /* CoreGraphics.framework */,
+				2AD9679E16ED4F9C00389794 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2AD9678016ED4F9B00389794 /* GGStorage */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9678916ED4F9B00389794 /* GoogleStorageAppDelegate.h */,
+				2AD9678A16ED4F9B00389794 /* GoogleStorageAppDelegate.m */,
+				2AD9679216ED4F9B00389794 /* MainStoryboard.storyboard */,
+				2AD9679516ED4F9B00389794 /* GoogleStorageViewController.h */,
+				2AD9679616ED4F9B00389794 /* GoogleStorageViewController.m */,
+				2AD9678116ED4F9B00389794 /* Supporting Files */,
+			);
+			path = GGStorage;
+			sourceTree = "<group>";
+		};
+		2AD9678116ED4F9B00389794 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AD9678216ED4F9B00389794 /* GGStorage-Info.plist */,
+				2AD9678316ED4F9B00389794 /* InfoPlist.strings */,
+				2AD9678616ED4F9B00389794 /* main.m */,
+				2AD9678816ED4F9B00389794 /* GGStorage-Prefix.pch */,
+				2AD9678C16ED4F9B00389794 /* Default.png */,
+				2AD9678E16ED4F9B00389794 /* Default@2x.png */,
+				2AD9679016ED4F9B00389794 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AD967A416ED4F9C00389794 /* GGStorageTests */ = {
+			isa = PBXGroup;
+			children = (
+				2AD967AA16ED4F9C00389794 /* GGStorageTests.h */,
+				2AD967AB16ED4F9C00389794 /* GGStorageTests.m */,
+				2AD967A516ED4F9C00389794 /* Supporting Files */,
+			);
+			path = GGStorageTests;
+			sourceTree = "<group>";
+		};
+		2AD967A516ED4F9C00389794 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AD967A616ED4F9C00389794 /* GGStorageTests-Info.plist */,
+				2AD967A716ED4F9C00389794 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2AD9677616ED4F9B00389794 /* GGStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AD967AF16ED4F9C00389794 /* Build configuration list for PBXNativeTarget "GGStorage" */;
+			buildPhases = (
+				2AD9677316ED4F9B00389794 /* Sources */,
+				2AD9677416ED4F9B00389794 /* Frameworks */,
+				2AD9677516ED4F9B00389794 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GGStorage;
+			productName = GGStorage;
+			productReference = 2AD9677716ED4F9B00389794 /* GGStorage.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2AD9679C16ED4F9C00389794 /* GGStorageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AD967B216ED4F9C00389794 /* Build configuration list for PBXNativeTarget "GGStorageTests" */;
+			buildPhases = (
+				2AD9679816ED4F9C00389794 /* Sources */,
+				2AD9679916ED4F9C00389794 /* Frameworks */,
+				2AD9679A16ED4F9C00389794 /* Resources */,
+				2AD9679B16ED4F9C00389794 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2AD967A316ED4F9C00389794 /* PBXTargetDependency */,
+			);
+			name = GGStorageTests;
+			productName = GGStorageTests;
+			productReference = 2AD9679D16ED4F9C00389794 /* GGStorageTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2AD9676F16ED4F9B00389794 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GoogleStorage;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = lily;
+			};
+			buildConfigurationList = 2AD9677216ED4F9B00389794 /* Build configuration list for PBXProject "GGStorage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2AD9676E16ED4F9B00389794;
+			productRefGroup = 2AD9677816ED4F9B00389794 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2AD9677616ED4F9B00389794 /* GGStorage */,
+				2AD9679C16ED4F9C00389794 /* GGStorageTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2AD9677516ED4F9B00389794 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD9678516ED4F9B00389794 /* InfoPlist.strings in Resources */,
+				2AD9678D16ED4F9B00389794 /* Default.png in Resources */,
+				2AD9678F16ED4F9B00389794 /* Default@2x.png in Resources */,
+				2AD9679116ED4F9B00389794 /* Default-568h@2x.png in Resources */,
+				2AD9679416ED4F9B00389794 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AD9679A16ED4F9C00389794 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD967A916ED4F9C00389794 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AD9679B16ED4F9C00389794 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2AD9677316ED4F9B00389794 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD9678716ED4F9B00389794 /* main.m in Sources */,
+				2AD9678B16ED4F9B00389794 /* GoogleStorageAppDelegate.m in Sources */,
+				2AD9679716ED4F9B00389794 /* GoogleStorageViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2AD9679816ED4F9C00389794 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD967AC16ED4F9C00389794 /* GGStorageTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2AD967A316ED4F9C00389794 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2AD9677616ED4F9B00389794 /* GGStorage */;
+			targetProxy = 2AD967A216ED4F9C00389794 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2AD9678316ED4F9B00389794 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AD9678416ED4F9B00389794 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2AD9679216ED4F9B00389794 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AD9679316ED4F9B00389794 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		2AD967A716ED4F9C00389794 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AD967A816ED4F9C00389794 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2AD967AD16ED4F9C00389794 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2AD967AE16ED4F9C00389794 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2AD967B016ED4F9C00389794 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GGStorage/GGStorage-Prefix.pch";
+				INFOPLIST_FILE = "GGStorage/GGStorage-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2AD967B116ED4F9C00389794 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GGStorage/GGStorage-Prefix.pch";
+				INFOPLIST_FILE = "GGStorage/GGStorage-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2AD967B316ED4F9C00389794 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GGStorage.app/GGStorage";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GGStorage/GGStorage-Prefix.pch";
+				INFOPLIST_FILE = "GGStorageTests/GGStorageTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		2AD967B416ED4F9C00389794 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GGStorage.app/GGStorage";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GGStorage/GGStorage-Prefix.pch";
+				INFOPLIST_FILE = "GGStorageTests/GGStorageTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2AD9677216ED4F9B00389794 /* Build configuration list for PBXProject "GGStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AD967AD16ED4F9C00389794 /* Debug */,
+				2AD967AE16ED4F9C00389794 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AD967AF16ED4F9C00389794 /* Build configuration list for PBXNativeTarget "GGStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AD967B016ED4F9C00389794 /* Debug */,
+				2AD967B116ED4F9C00389794 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2AD967B216ED4F9C00389794 /* Build configuration list for PBXNativeTarget "GGStorageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AD967B316ED4F9C00389794 /* Debug */,
+				2AD967B416ED4F9C00389794 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2AD9676F16ED4F9B00389794 /* Project object */;
+}
