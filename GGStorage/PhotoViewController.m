@@ -14,6 +14,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ThumbnailLineInfo.h"
+#import "PhotoFullScreenViewController.h"
 //#import "DropboxServiceClient.h"
 
 @interface PhotoViewController ()<DBRestClientDelegate>
@@ -53,6 +54,7 @@
 @property Boolean isDisplay;
 @property int currentBlock;
 @property (nonatomic, strong) UITapGestureRecognizer *subImageTap;
+@property int tappedPhotoId;
 @end
 
 //NSString * const kGTMOAuth2AccountName = @"OAuth";
@@ -95,6 +97,8 @@
 @synthesize fetchGooglePhotosLock = _fetchGooglePhotosLock;
 @synthesize isDisplay = _isDisplay;
 @synthesize currentBlock = _currentBlock;
+@synthesize tappedPhotoId = _tappedPhotoId;
+
 - (DBRestClient *)dropClient {
     if (!_dropClient) {
         _dropClient =
@@ -747,14 +751,27 @@ loadMetadataFailedWithError:(NSError *)error {
         }
     }
     NSLog(@"%d", photoIndex);
-    UIImageView *myView = [[UIImageView alloc]init];
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:1.0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-    myView.frame = CGRectMake(0,0,320,480);
-    myView.transform = CGAffineTransformIdentity;
-    [UIView commitAnimations];
+    _tappedPhotoId = photoIndex;
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationBeginsFromCurrentState:YES];
+//    [UIView setAnimationDuration:1.0];
+//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//    [UIView commitAnimations];
+//    UIImageView *imageView = [_scrollView.subviews objectAtIndex:photoIndex+2];
+//    [UIView animateWithDuration:1.0 animations:^{
+//        imageView
+//        imageView.frame = _scrollView.bounds;
+//    }];
+    [self performSegueWithIdentifier:@"ActPhotoFullScreen" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ActPhotoFullScreen"]) {
+        PhotoFullScreenViewController *fullScreenVC = segue.destinationViewController;
+        fullScreenVC.photos = _googlePhotos;
+        fullScreenVC.photoIndex = _tappedPhotoId;
+    }
 }
 
 @end

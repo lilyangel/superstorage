@@ -122,6 +122,31 @@
             </objects>
             <point key="canvasLocation" x="30" y="-828"/>
         </scene>
+        <!--Photo Full Screen View Controller-->
+        <scene sceneID="P8U-LS-gYS">
+            <objects>
+                <viewController autoresizesArchivedViewToFullSize="NO" hidesBottomBarWhenPushed="YES" id="BsO-9q-8dK" customClass="PhotoFullScreenViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7cL-R3-tKe">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" id="D8f-yF-inC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IAg-Db-74b"/>
+                    <connections>
+                        <outlet property="scrollView" destination="D8f-yF-inC" id="zJh-ee-dfn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iSR-MA-89A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1014" y="-828"/>
+        </scene>
         <!--Photo View Controller - Item-->
         <scene sceneID="5">
             <objects>
@@ -140,6 +165,7 @@
                     <navigationItem key="navigationItem" id="z0q-um-aZk"/>
                     <connections>
                         <outlet property="scrollView" destination="5tg-Fw-MQe" id="KM7-kx-qeJ"/>
+                        <segue destination="BsO-9q-8dK" kind="push" identifier="ActPhotoFullScreen" id="F7k-ZR-LBt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -148,6 +174,12 @@
         </scene>
     </scenes>
     <classes>
+        <class className="PhotoFullScreenViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoFullScreenViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+            </relationships>
+        </class>
         <class className="PhotoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoViewController.h"/>
             <relationships>

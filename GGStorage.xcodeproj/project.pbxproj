@@ -12,6 +12,7 @@
 		2AB0BB2416EFD8B80071E7B0 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2316EFD8B80071E7B0 /* PhotoViewController.m */; };
 		2AB0BB2716EFDD2F0071E7B0 /* GlobalSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2616EFDD2F0071E7B0 /* GlobalSetting.m */; };
 		2AB0BB2A16EFEA710071E7B0 /* DropboxServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2916EFEA710071E7B0 /* DropboxServiceClient.m */; };
+		2AC2622216FA6CA500EA907C /* PhotoFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC2622116FA6CA500EA907C /* PhotoFullScreenViewController.m */; };
 		2AD6A42216EEE88E008FF6E1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD6A42116EEE88E008FF6E1 /* SettingViewController.m */; };
 		2AD894CA16F3AE53007A5DC6 /* ThumbnailLineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD894C916F3AE53007A5DC6 /* ThumbnailLineInfo.m */; };
 		2AD9677B16ED4F9B00389794 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD9677A16ED4F9B00389794 /* UIKit.framework */; };
@@ -424,6 +425,8 @@
 		2AB0BB2616EFDD2F0071E7B0 /* GlobalSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSetting.m; sourceTree = "<group>"; };
 		2AB0BB2816EFEA700071E7B0 /* DropboxServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxServiceClient.h; sourceTree = "<group>"; };
 		2AB0BB2916EFEA710071E7B0 /* DropboxServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxServiceClient.m; sourceTree = "<group>"; };
+		2AC2622016FA6CA500EA907C /* PhotoFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFullScreenViewController.h; sourceTree = "<group>"; };
+		2AC2622116FA6CA500EA907C /* PhotoFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFullScreenViewController.m; sourceTree = "<group>"; };
 		2AD6A42016EEE88D008FF6E1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = ../SettingViewController.h; sourceTree = "<group>"; };
 		2AD6A42116EEE88E008FF6E1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = ../SettingViewController.m; sourceTree = "<group>"; };
 		2AD894C816F3AE53007A5DC6 /* ThumbnailLineInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailLineInfo.h; sourceTree = "<group>"; };
@@ -1133,6 +1136,8 @@
 				2AD6A42116EEE88E008FF6E1 /* SettingViewController.m */,
 				2AB0BB2216EFD8B70071E7B0 /* PhotoViewController.h */,
 				2AB0BB2316EFD8B80071E7B0 /* PhotoViewController.m */,
+				2AC2622016FA6CA500EA907C /* PhotoFullScreenViewController.h */,
+				2AC2622116FA6CA500EA907C /* PhotoFullScreenViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2613,6 +2618,7 @@
 				2AB0BB2716EFDD2F0071E7B0 /* GlobalSetting.m in Sources */,
 				2AB0BB2A16EFEA710071E7B0 /* DropboxServiceClient.m in Sources */,
 				2AD894CA16F3AE53007A5DC6 /* ThumbnailLineInfo.m in Sources */,
+				2AC2622216FA6CA500EA907C /* PhotoFullScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
