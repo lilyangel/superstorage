@@ -12,6 +12,8 @@
 		2AB0BB2416EFD8B80071E7B0 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2316EFD8B80071E7B0 /* PhotoViewController.m */; };
 		2AB0BB2716EFDD2F0071E7B0 /* GlobalSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2616EFDD2F0071E7B0 /* GlobalSetting.m */; };
 		2AB0BB2A16EFEA710071E7B0 /* DropboxServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB0BB2916EFEA710071E7B0 /* DropboxServiceClient.m */; };
+		2AC05C4216FBD117000C7304 /* list_bullets-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC05C4116FBD117000C7304 /* list_bullets-1.png */; };
+		2AC05C4416FBDFF0000C7304 /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AC05C4316FBDFF0000C7304 /* list.png */; };
 		2AC2622216FA6CA500EA907C /* PhotoFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC2622116FA6CA500EA907C /* PhotoFullScreenViewController.m */; };
 		2AD6A42216EEE88E008FF6E1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD6A42116EEE88E008FF6E1 /* SettingViewController.m */; };
 		2AD894CA16F3AE53007A5DC6 /* ThumbnailLineInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD894C916F3AE53007A5DC6 /* ThumbnailLineInfo.m */; };
@@ -425,6 +427,8 @@
 		2AB0BB2616EFDD2F0071E7B0 /* GlobalSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalSetting.m; sourceTree = "<group>"; };
 		2AB0BB2816EFEA700071E7B0 /* DropboxServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxServiceClient.h; sourceTree = "<group>"; };
 		2AB0BB2916EFEA710071E7B0 /* DropboxServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxServiceClient.m; sourceTree = "<group>"; };
+		2AC05C4116FBD117000C7304 /* list_bullets-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list_bullets-1.png"; path = "../list_bullets-1.png"; sourceTree = "<group>"; };
+		2AC05C4316FBDFF0000C7304 /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = list.png; path = ../list.png; sourceTree = "<group>"; };
 		2AC2622016FA6CA500EA907C /* PhotoFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoFullScreenViewController.h; sourceTree = "<group>"; };
 		2AC2622116FA6CA500EA907C /* PhotoFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoFullScreenViewController.m; sourceTree = "<group>"; };
 		2AD6A42016EEE88D008FF6E1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = ../SettingViewController.h; sourceTree = "<group>"; };
@@ -1116,6 +1120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A35DC1016FBC67A00D47FE0 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				2AC05C4316FBDFF0000C7304 /* list.png */,
+				2AC05C4116FBD117000C7304 /* list_bullets-1.png */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
 		2AD6A3E916ED8189008FF6E1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,6 +1206,7 @@
 		2AD9678116ED4F9B00389794 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2A35DC1016FBC67A00D47FE0 /* image */,
 				2AD9678216ED4F9B00389794 /* GGStorage-Info.plist */,
 				2AD9678316ED4F9B00389794 /* InfoPlist.strings */,
 				2AD9678616ED4F9B00389794 /* main.m */,
@@ -2277,6 +2291,8 @@
 				2AD96BEA16ED501500389794 /* InfoPlist.strings in Resources */,
 				2AD96BEB16ED501500389794 /* GDataFramework-Info.plist in Resources */,
 				2AD96BEC16ED501500389794 /* GDataUnitTests-Info.plist in Resources */,
+				2AC05C4216FBD117000C7304 /* list_bullets-1.png in Resources */,
+				2AC05C4416FBDFF0000C7304 /* list.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

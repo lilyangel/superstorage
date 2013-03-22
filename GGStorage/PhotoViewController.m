@@ -18,6 +18,7 @@
 //#import "DropboxServiceClient.h"
 
 @interface PhotoViewController ()<DBRestClientDelegate>
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 //@property GDataFeedPhotoAlbum *mAlbumPhotosFeed;
 //@property GDataFeedPhotoUser *mUserAlbumFeed;
@@ -49,12 +50,13 @@
 @property GDataServiceGooglePhotos *googlePhotoService;
 @property float scrollBeginOffset;
 @property float scrollEndOffset;
-@property int googlePhotosIndex;
+@property int photosIndex;
 @property NSCondition *fetchGooglePhotosLock;
 @property Boolean isDisplay;
 @property int currentBlock;
 @property (nonatomic, strong) UITapGestureRecognizer *subImageTap;
 @property int tappedPhotoId;
+@property NSMutableDictionary *dropboxThumbnails;
 @end
 
 //NSString * const kGTMOAuth2AccountName = @"OAuth";
@@ -92,17 +94,21 @@
 @synthesize googlePhotoService = _googlePhotoService;
 @synthesize scrollBeginOffset = _scrollBeginOffset;
 @synthesize scrollEndOffset = _scrollEndOffset;
-@synthesize googlePhotosIndex = _googlePhotosIndex;
+@synthesize photosIndex = _photosIndex;
 @synthesize googleThumbnails_lock = _googleThumbnails_lock;
 @synthesize fetchGooglePhotosLock = _fetchGooglePhotosLock;
 @synthesize isDisplay = _isDisplay;
 @synthesize currentBlock = _currentBlock;
 @synthesize tappedPhotoId = _tappedPhotoId;
+@synthesize toolbar = _toolbar;
+@synthesize dropboxThumbnails = _dropboxThumbnails;
 
 - (DBRestClient *)dropClient {
     if (!_dropClient) {
-        _dropClient =
-        [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        if (![DBSession sharedSession]) {
+            return nil;
+        }
+        _dropClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
         _dropClient.delegate = self;
     }
     return _dropClient;
@@ -132,50 +138,81 @@
     _googleThumbnails_lock = [[NSLock alloc]init];
     _googleFetchCount = 0;
     _googleFetchEndCount = 0;
-    //    _dropboxThumbnailPage = 0;
-//    _googleThumbnailIndex = 0;
     _photoIndexBegin = 0;
     _photoIndexEnd = 0;
     _photoThumbnails = [[NSMutableArray alloc]init];
     _googlePhotos = [[NSMutableArray alloc]init];
     _googleThumbnails = [[NSMutableDictionary alloc]init];
     _thumbnailLine = [[NSMutableArray alloc]init];
-//    _imageWidth = (_scrollView.frame.size.width-4)/_columns;
+    _dropboxThumbnails = [[NSMutableDictionary alloc]init];
     _imageHeight = 128;
     _isDisplay = YES;
     _currentBlock=0;
     _scrollView.delegate = self;
-  //  NSLog(@"%f %f",_scrollView.frame.size.height, _scrollView.frame.size.width);    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    [UIApplication sharedApplication].statusBarStyle = UIBarStyleBlack;
+    NSLog(@"%f %f %f, %f",[UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.tabBarController.tabBar.frame.size.height, [[UIApplication sharedApplication] statusBarFrame].size.height);
+    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    CGFloat toptoolbaHeight = self.navigationController.navigationBar.frame.size.height;
+    _scrollView.frame = CGRectMake(0, statusBarHeight+toptoolbaHeight, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-statusBarHeight-self.tabBarController.tabBar.frame.size.height-toptoolbaHeight);
+    NSLog(@"%f %f",_scrollView.frame.size.height, _scrollView.frame.size.width);
+    [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height+10)];
     //display photos in google storage.
     _googleAuth = [[GTMOAuth2Authentication alloc] init];
     _googleAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName clientID:kClientID clientSecret:kClientSecret];
     [self googlePhotosService];
     NSString *username = _googleAuth.userEmail;
-    NSURL *feedURL = [GDataServiceGooglePhotos photoFeedURLForUserID:username
-                                                             albumID:nil
-                                                           albumName:nil
-                                                             photoID:nil
-                                                                kind:nil
-                                                              access:nil];
-    GDataServiceTicket *ticket = [_googlePhotoService fetchFeedWithURL:feedURL
-                                                  delegate:self
-                                         didFinishSelector:@selector(albumListFetchTicket:finishedWithFeed:error:)];
+    if (username.length) {
+        NSURL *feedURL = [GDataServiceGooglePhotos photoFeedURLForUserID:username
+                                                                 albumID:nil
+                                                               albumName:nil
+                                                                 photoID:nil
+                                                                    kind:nil
+                                                                  access:nil];
+        
+        GDataServiceTicket *ticket = [_googlePhotoService fetchFeedWithURL:feedURL
+                                                                  delegate:self
+                                                         didFinishSelector:@selector(albumListFetchTicket:finishedWithFeed:error:)];
+    }
     //display photos in dropbox;
     [self dropClient];
-    NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *path = [NSString stringWithFormat:@"%@/dropbox",dir];
+//    NSString *dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *path = [NSString stringWithFormat:@"%@/dropbox",dir];
 //    [_dropClient loadThumbnail:@"/Sfo/Photo Aug 25, 11 29 53 AM.jpg" ofSize:@"128x128" intoPath:path];
 //    DropboxServiceClient *dropboxClient = [[DropboxServiceClient alloc]init];
 //    [dropboxClient downloadDropboxThumbnail:path withCount:10];
-    [_dropClient loadMetadata:@"/" withHash:nil];
-    CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    [_scrollView setContentInset:UIEdgeInsetsMake(statusBarHeight+2, 0, 0, 0)];
-    [_scrollView scrollRectToVisible:CGRectMake(0, 0, 320, 1) animated:YES];
+    if ((!username.length) && (_dropClient)) {
+        [_dropClient loadMetadata:@"/" withHash:nil];
+    }
+//    [_scrollView setContentInset:UIEdgeInsetsMake(statusBarHeight+2, 0, 0, 0)];
+//    [_scrollView scrollRectToVisible:CGRectMake(0, 0, 320, 1) animated:YES];
     self.subImageTap = [[UITapGestureRecognizer alloc]
                         initWithTarget:self action:@selector(handleTap:)];
     [_scrollView addGestureRecognizer:self.subImageTap];
+    [self addRightButtons];
 }
 
+-(void)addRightButtons
+{
+    UIImage *listImage = [UIImage imageNamed:@"list.png"];
+    UIButton *viewFormatButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [viewFormatButton setBackgroundImage:listImage forState:UIControlStateNormal];
+    [viewFormatButton addTarget:self action:@selector(showList) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *viewFormatItem = [[UIBarButtonItem alloc] initWithCustomView:viewFormatButton];
+    //add space between fav button and location button
+    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceItem.width = 15;
+    
+    
+    NSArray *barButtonItems = [NSArray arrayWithObjects:viewFormatItem, nil];
+    
+    self.navigationItem.rightBarButtonItems = barButtonItems;
+}
+
+-(void)showList
+{
+
+}
 // album list fetch callback
 - (void)albumListFetchTicket:(GDataServiceTicket *)ticket
             finishedWithFeed:(GDataFeedPhotoUser *)feed
@@ -199,7 +236,13 @@
                 }
             }
             [_googleThumbnails_lock unlock];
+            if (_googleFetchCount < _photoPerBlock) {
+                [self downloadDropboxThumbnails];
+            }
         }
+    }else{
+        NSLog(@"couldn't get album");
+        //tell user to fresh again!
     }
 }
 
@@ -207,7 +250,10 @@
 - (void)photosTicket:(GDataServiceTicket *)ticket
     finishedWithFeed:(GDataFeedPhotoAlbum *)feed
                error:(NSError *)error {
-    
+    if (error) {
+        NSLog(@"couldn't get photos");
+        return;
+    }
     NSArray *photos = [feed entries];
     int initPhotos = [photos count];
     //   int photoCount = MIN([photos count], _photoPerBlock);
@@ -271,20 +317,35 @@
                 [_dropClient loadMetadata: path withHash:nil];
 
             }else{
-//                NSLog(@"%@, %@", photoInfo.filename, photoInfo.lastModifiedDate);
+//               NSLog(@"%@, %@", photoInfo.filename, photoInfo.lastModifiedDate);
                 [_photoThumbnails addObject:photoInfo];
-                _photoCount++;
                 if (_photoCount <=_photoPerBlock) {
-                    int index = _photoCount;
-                    NSString* downloadPath = [NSString stringWithFormat:@"%@/%@",_documentDir, photoInfo.filename];
-                    [_dropClient loadThumbnail:photoInfo.path ofSize:@"256x256" intoPath:downloadPath];
-                    
-                    //add to view
+//                    NSString* downloadPath = [NSString stringWithFormat:@"%@/%@",_documentDir, photoInfo.filename];
+//                    [_dropClient loadThumbnail:photoInfo.path ofSize:@"256x256" intoPath:downloadPath];
+//                    //add to view
+//                    NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:downloadPath];
+//                    NSLog(@"%@",imageData);
+//                    [_dropboxThumbnails setObject:imageData forKey:[NSNumber numberWithInt:_photoCount]];
+                    [self displayDropboxThumbnail:_photoCount];
                 }
+                _photoCount++;
             }
         }
     }
 }
+
+-(void)displayDropboxThumbnail:(int) dropboxIndex
+{
+    [_dropboxThumbnails removeAllObjects];
+    DBMetadata *photoInfo = [_photoThumbnails objectAtIndex:dropboxIndex];
+    NSString* downloadPath = [NSString stringWithFormat:@"%@/%@",_documentDir, photoInfo.filename];
+    [_dropClient loadThumbnail:photoInfo.path ofSize:@"256x256" intoPath:downloadPath];
+    //add to view
+    NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:downloadPath];
+    [_dropboxThumbnails setValue:imageData forKey:[NSNumber numberWithInt:dropboxIndex]];
+    [self displayThumbnailPage:_dropboxThumbnails begin:dropboxIndex end:dropboxIndex+1];
+}
+
 //
 -(void)downloadDropboxThumbnail:(int)page
 {
@@ -312,7 +373,7 @@ loadMetadataFailedWithError:(NSError *)error {
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (GDataServiceGooglePhotos *)googlePhotosService {
@@ -356,7 +417,7 @@ loadMetadataFailedWithError:(NSError *)error {
     int count = 0;
     int i = 0;
     NSLog(@"beginIndex %d, endIndex %d", beginIndex, endIndex);
-    while ((count<_googlePhotosIndex)&&(i<[_thumbnailLine count])) {
+    while ((count<_photosIndex)&&(i<[_thumbnailLine count])) {
 //        ThumbnailLineInfo *thumbnailLineInfo = ;
         ThumbnailLineInfo *imagePerLine =  [_thumbnailLine objectAtIndex:i];
         count += [imagePerLine imageCount];
@@ -444,7 +505,7 @@ loadMetadataFailedWithError:(NSError *)error {
                 [_scrollView addSubview:imageView1];
                 ThumbnailLineInfo *thumbnailInfo = [_thumbnailLine objectAtIndex:(lineIndex-1)];
                 thumbnailInfo.endCoordinateX = _scrollView.frame.size.width - 2;
-                thumbnailInfo.imageCount = 2;
+                thumbnailInfo.imageCount++;
             }else{
                 return;
             }
@@ -455,22 +516,22 @@ loadMetadataFailedWithError:(NSError *)error {
     
     while(beginIndex<endIndex) {
         NSData *imageData = [imagesData objectForKey:[NSNumber numberWithInt:beginIndex]];
-        GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
+//        GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
 //        NSLog(@"%@", [[[photo mediaGroup]mediaThumbnails] objectAtIndex:2]);
         UIImage *image1 = [[UIImage alloc]initWithData:imageData];
         if(image1.size.height > image1.size.width){
             if (beginIndex+1<endIndex) {
                 beginIndex++;
-                GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
+//                GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
 //                NSLog(@"%@", [[[photo mediaGroup]mediaThumbnails] objectAtIndex:2]);
                 NSData *imageData2 = [imagesData objectForKey:[NSNumber numberWithInt:beginIndex]];
                 UIImage *image2 = [[UIImage alloc]initWithData:imageData2];
                 if (image2.size.height>image2.size.width) {
-                    GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
+//                    GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
  //                   NSLog(@"%@", [[[photo mediaGroup]mediaThumbnails]objectAtIndex:2]);
                     if (beginIndex+1<endIndex) {
                         beginIndex++;
-                        GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
+//                        GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
 //                        NSLog(@"%@", [[[photo mediaGroup]mediaThumbnails] objectAtIndex:2]);
                         NSData *imageData3 = [imagesData objectForKey:[NSNumber numberWithInt:beginIndex]];
                         UIImage *image3 = [[UIImage alloc]initWithData:imageData3];
@@ -581,7 +642,7 @@ loadMetadataFailedWithError:(NSError *)error {
         }else{
             if (beginIndex+1<endIndex) {
                 beginIndex++;
-                GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
+//                GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:beginIndex];
                 NSData *imageData2 = [imagesData objectForKey:[NSNumber numberWithInt:beginIndex]];
                 UIImage *image2 = [[UIImage alloc]initWithData:imageData2];
                 UIImageView *imageView1 = [[UIImageView alloc]init];
@@ -591,7 +652,7 @@ loadMetadataFailedWithError:(NSError *)error {
                     float imageWidth = (_scrollView.frame.size.width - 4)/3;
                     imageView1.frame = CGRectMake(2, lineIndex*_imageHeight, imageWidth*2, _imageHeight);
                     imageView2.frame = CGRectMake(2+imageWidth*2, lineIndex*_imageHeight, imageWidth, _imageHeight);
-                    thumbnailInfo.splitCoordinate1 = imageWidth;
+                    thumbnailInfo.splitCoordinate1 = imageWidth*2;
                 }else{
                     float imageWidth = (_scrollView.frame.size.width - 4)/2;
                     imageView1.frame = CGRectMake(2, lineIndex*_imageHeight, imageWidth, _imageHeight);
@@ -637,33 +698,29 @@ loadMetadataFailedWithError:(NSError *)error {
         }
     }
     [_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width, _imageHeight*lineIndex)];
-    _googlePhotosIndex = beginIndex+1;
+    _photosIndex = beginIndex+1;
 }
 
 - (void)imageFetcher:(GTMHTTPFetcher *)fetcher finishedWithData:(NSData *)data error:(NSError *)error {
     if (error == nil) {
-        // got the data; display it in the image view
- //       UIImage *image = [[UIImage alloc] initWithData:data];
-        
- //       UIImageView *view = (UIImageView *)[fetcher userData];
- //       view.frame = CGRectMake(0, 0+_googleThumbnailIndex*100, 100, 100);
         NSNumber *index = [fetcher userData];
- //       [self displayThumbnail:data withIndex:[index intValue]];
- //       NSDictionary *dataInfo = [[NSDictionary alloc]init];
         [_googleThumbnails setValue:data forKey:[fetcher userData]];
         _googleFetchEndCount++;
-//        int photoCount = MIN([[self.mAlbumPhotosFeed entries] count], _photoPerBlock);
         if ((_googleFetchEndCount == _googleFetchCount)||(_googleFetchEndCount == _photoPerBlock)) {
             [self displayThumbnailPage:_googleThumbnails begin:0 end:_googleFetchEndCount];
+            if (_googleFetchEndCount < _photoPerBlock) {
+                [self downloadDropboxThumbnails];
+            }
         }
-     //   _googleThumbnailIndex++;
- //       [view setImage:image];
-//        UIImageView *imageView = (UIImageView *)[fetcher userData];
-//        UIImage *image = [[UIImage alloc] initWithData:data];
-//        imageView.image = image;
-//        imageView.contentMode = UIViewContentModeScaleAspectFill;
     } else {
         NSLog(@"imageFetcher:%@ error:%@", fetcher,  error);
+    }
+}
+
+-(void) downloadDropboxThumbnails
+{
+    if (_dropClient) {
+        [_dropClient loadMetadata:@"/" withHash:nil];
     }
 }
 
@@ -671,9 +728,9 @@ loadMetadataFailedWithError:(NSError *)error {
     if (error == nil) {
         [_googleThumbnails setValue:data forKey:[fetcher userData]];
         _googleFetchEndCount++;
-        if ((_googleFetchEndCount == _googleFetchCount)||(_googleFetchEndCount == _photoPerBlock+_googlePhotosIndex)) {
+        if ((_googleFetchEndCount == _googleFetchCount)||(_googleFetchEndCount == _photoPerBlock+_photosIndex)) {
             NSDictionary *subGoogleThumbnails = [[NSDictionary alloc]initWithDictionary:_googleThumbnails];
-            [self displayThumbnailPage:subGoogleThumbnails begin:_googlePhotosIndex end:_googleFetchEndCount];
+            [self displayThumbnailPage:subGoogleThumbnails begin:_photosIndex end:_googleFetchEndCount];
             _isDisplay = YES;
         }
     } else {
@@ -692,6 +749,32 @@ loadMetadataFailedWithError:(NSError *)error {
     _scrollBeginOffset = _scrollView.contentOffset.x;
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    //clean all old photos and template data in memory.
+    _googleAuth = [[GTMOAuth2Authentication alloc] init];
+    _googleAuth = [GTMOAuth2ViewControllerTouch authForGoogleFromKeychainForName:kKeychainItemName clientID:kClientID clientSecret:kClientSecret];
+    [self googlePhotosService];
+    NSString *username = _googleAuth.userEmail;
+    if (username.length) {
+        NSURL *feedURL = [GDataServiceGooglePhotos photoFeedURLForUserID:username
+                                                                 albumID:nil
+                                                               albumName:nil
+                                                                 photoID:nil
+                                                                    kind:nil
+                                                                  access:nil];
+        
+        GDataServiceTicket *ticket = [_googlePhotoService fetchFeedWithURL:feedURL
+                                                                  delegate:self
+                                                         didFinishSelector:@selector(albumListFetchTicket:finishedWithFeed:error:)];
+    }
+    if (_scrollBeginOffset > _scrollView.contentOffset.y) {
+        if (_dropClient) {
+            [_dropClient loadMetadata:@"/" withHash:nil];
+        }
+    }
+}
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if ((_scrollBeginOffset < _scrollView.contentOffset.y)&&(_scrollView.contentOffset.y != 0.0) && (_scrollView.contentOffset.y != -0.0)){
@@ -700,8 +783,8 @@ loadMetadataFailedWithError:(NSError *)error {
             _currentBlock = _scrollView.contentOffset.y/_scrollView.frame.size.height;
             NSLog(@"%f, %d", _scrollView.contentOffset.y/_scrollView.frame.size.height, _currentBlock);
             _currentBlock++;
-            if (_googlePhotosIndex<_googleFetchCount) {
-                int endIndex = MIN(_photoPerBlock+_googlePhotosIndex, _googleFetchCount);
+            if (_photosIndex<_googleFetchCount) {
+                int endIndex = MIN(_photoPerBlock+_photosIndex, _googleFetchCount);
                 [_fetchGooglePhotosLock lock];
                 if (!_isDisplay) {
                     [_fetchGooglePhotosLock wait];
@@ -709,12 +792,9 @@ loadMetadataFailedWithError:(NSError *)error {
                 [_fetchGooglePhotosLock unlock];
                 _isDisplay = NO;
                 if ([_googleThumbnails_lock tryLock]) {
-            
-                    //            [_googleThumbnails_lock lock];
                     [_googleThumbnails removeAllObjects];
-                    _googleFetchEndCount = _googlePhotosIndex;
-//                    _googleFetchCount = endIndex;
-                    for (int i = _googlePhotosIndex; i<endIndex; i++) {
+                    _googleFetchEndCount = _photosIndex;
+                    for (int i = _photosIndex; i<endIndex; i++) {
                         GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:i];
                         NSArray *thumbnails = [[photo mediaGroup]mediaThumbnails];
                         if ([thumbnails count] > 2){
@@ -722,8 +802,7 @@ loadMetadataFailedWithError:(NSError *)error {
                             GTMHTTPFetcher *fetcher = [GTMHTTPFetcher fetcherWithURLString:imageURLString];
                             [fetcher setUserData:[NSNumber numberWithInt:i]];
                             [fetcher beginFetchWithDelegate:self
-                                          didFinishSelector:@selector(scrollImageFetcher:finishedWithData:error:)];
-                            
+                                          didFinishSelector:@selector(scrollImageFetcher:finishedWithData:error:)];     
                         }
                     }
                     [_googleThumbnails_lock unlock];
@@ -740,7 +819,6 @@ loadMetadataFailedWithError:(NSError *)error {
     for (int i = 0; i<column; i++) {
         photoIndex += [[_thumbnailLine objectAtIndex:i]imageCount];
     }
-    GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:photoIndex];
     float splitCoordinate1 = [[_thumbnailLine objectAtIndex:column] splitCoordinate1];
     float splitCoordinate2 = [[_thumbnailLine objectAtIndex:column] splitCoordinate2];
     if ((splitCoordinate1>0)&&(touchPoint.x>splitCoordinate1)) {
@@ -750,8 +828,10 @@ loadMetadataFailedWithError:(NSError *)error {
             photoIndex++;
         }
     }
-    NSLog(@"%d", photoIndex);
+    GDataEntryPhoto *photo = [_googlePhotos objectAtIndex:photoIndex];
+//    NSLog(@"%d, %@", photoIndex, [[[[photo mediaGroup]mediaContents]objectAtIndex:0]URLString]);
     _tappedPhotoId = photoIndex;
+    
 //    [UIView beginAnimations:nil context:NULL];
 //    [UIView setAnimationBeginsFromCurrentState:YES];
 //    [UIView setAnimationDuration:1.0];

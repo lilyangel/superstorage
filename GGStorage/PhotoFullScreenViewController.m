@@ -61,10 +61,9 @@
     nav_title.textColor = [UIColor whiteColor];
     nav_title.adjustsFontSizeToFitWidth = YES;
     nav_title.text = [[[photo mediaGroup] mediaTitle]stringValue];
-    nav_title.backgroundColor = [UIColor blackColor];
+    nav_title.backgroundColor = [UIColor clearColor];
+//    self.navigationController.navigationBar.topItem.title = [[[photo mediaGroup] mediaTitle]stringValue];
     [self.navigationController.navigationBar addSubview:nav_title];
-//    self.navigationController.navigationBar = [[[photo mediaGroup] mediaTitle]stringValue];
-    NSLog(@"%@",[[[photo mediaGroup] mediaTitle]stringValue]);
     self.scrollView.delegate=self;
     [_scrollView setContentSize:CGSizeMake(_scrollView.bounds.size.width * (_photoCount), _scrollView.bounds.size.height)];
     _beginPhotoIndex = _photoIndex;
@@ -85,6 +84,8 @@
                                         initWithTarget:self action:@selector(handlePhotoTap:)];
     [_scrollView addGestureRecognizer:imageTap];
 }
+
+
 
 -(void)handlePhotoTap:(UITapGestureRecognizer*)gesture
 {
