@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShowFolderInfoViewController : UITableViewController
-
+@interface ShowFolderInfoViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@property id folderInfo;
+//0:googleDrive
+//1:dropbox
+@property int mediaType;
+@property Boolean showFullPhoto;
+@property NSArray *googleCurrentList;
+@property NSArray *dropboxCurrentList;
+@property id currentFile;
 @end

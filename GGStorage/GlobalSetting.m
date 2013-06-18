@@ -8,7 +8,7 @@
 
 #import "GlobalSetting.h"
 
-NSString * scope = @"https://photos.googleapis.com/data/feed/api/user https://www.googleapis.com/auth/userinfo.profile";
+NSString * scope = @"https://photos.googleapis.com/data/feed/api/user https://www.googleapis.com/auth/userinfo.profile https://photos.googleapis.com/data/entry/api/user";
 NSString * kGTMOAuth2AccountName = @"OAuth";
 NSString * kKeychainItemName = @"Google Drive Quickstart";
 NSString * kClientID = @"81720981197.apps.googleusercontent.com";

@@ -7,6 +7,10 @@
 //
 
 #import "NeedRemovedViewController.h"
+#import "GData.h"
+#import "GDataServiceGooglePhotos.h"
+#import "GTMOAuth2ViewControllerTouch.h"
+#import "GlobalSetting.h"
 
 @interface NeedRemovedViewController ()
 
@@ -32,6 +36,48 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    GDataServiceGoogle* service = [[GDataServiceGoogle alloc] init];
+    
+    [service setUserCredentialsWithUsername:@"myusername"
+     
+                                   password:@"mypassword"];
+    NSURL* feedURL = [GDataServiceGooglePhotos
+                      photoFeedURLForUserID:@"myusername"
+                      
+                      albumID:nil albumName:nil photoID:nil kind:nil
+                      
+                      access:kGDataPhotoAccessAll];
+    
+    GDataServiceGooglePhotos* ticket = [service
+                                        fetchPhotoFeedWithURL:feedURL
+                                        
+                                        delegate:self
+                                        
+                                        didFinishSelector:@selector
+                                        (albumListFetchTicket:finishedWithFeed)
+                                        
+                                        didFailSelector:@selector
+                                        (albumListFetchTicket:failedWithError:)];
+    
+    //Then insert a new album entry into that feed:
+    
+    GDataEntryPhotoAlbum* newAlbum = [GDataEntryPhotoAlbum
+                                      albumEntry]; 
+    
+    [newAlbum setTitleWithString:@"foo"]; 
+    [newAlbum setPhotoDescriptionWithString:@"bar"]; 
+    [newAlbum setAccess:kGDataPhotoAccessPublic]; 
+    
+    NSURL *postLinkV;// = [[feedURL postLink] URL];
+    ticket = [service fetchEntryByInsertingEntry:newAlbum 
+              
+                                           forFeedURL:postLinkV 
+              
+                                             delegate:self 
+              
+                                    didFinishSelector:@selector 
+              (albumCreationTicket:finishedWithEntry:) ]; 
+
 }
 
 - (void)didReceiveMemoryWarning

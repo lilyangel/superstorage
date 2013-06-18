@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhotoFullScreenViewController.h"
+#import "PhotoViewDelegate.h"
 
 @interface PhotoViewController : UIViewController<UIScrollViewDelegate>
-
+@property id<PhotoViewDelegate> delegate;
 @end
